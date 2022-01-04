@@ -6,18 +6,18 @@ const Header = ()=> {
         <>
         <nav className="global-nav">
 			<div className="global-nav-links">
-				<a href="#" className="global-nav-item">Introduction</a>
-				<a href="#" className="global-nav-item">Skills</a>
-				<a href="#" className="global-nav-item">Projects</a>
-				<a href="#" className="global-nav-item">Contact</a>
+				<a href="temp" className="global-nav-item">Introduction</a>
+				<a href="temp" className="global-nav-item">Skills</a>
+				<a href="temp" className="global-nav-item">Projects</a>
+				<a href="temp" className="global-nav-item">Contact</a>
 			</div>
 		</nav>
 		<nav className="local-nav">
 			<div className="local-nav-links">
-				<a href="#" className="product-name">Portfolio</a>
-				<a href="#">GitHub</a>
-				<a href="#">Blog</a>
-				<a href="#">Instagram</a>
+				<a href="temp" className="logo-name">Portfolio</a>
+				<a href="https://github.com/nggoong" target='blank'>GitHub</a>
+				<a href="https://velog.io/@apro_xo" target='blank'>Blog</a>
+				<a href="https://www.instagram.com/apro_xo/?hl=ko" target='blank'>Instagram</a>
 			</div>
 		</nav>
     </>
