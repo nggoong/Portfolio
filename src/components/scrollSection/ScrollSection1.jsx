@@ -1,5 +1,7 @@
 import './ScrollSection.css';
 import React, { useRef, useEffect } from 'react';
+// import SceneInfo from '../../SceneInfo';
+import { setLayout } from '../../funcs/funcs';
 
 const ScrollSection1 = () => {
 
@@ -8,6 +10,10 @@ const ScrollSection1 = () => {
     const messageB = useRef();
     const messageC = useRef();
 
+
+    useEffect(()=> {
+        setLayout(0, container);
+    }, []);
 
     return(
         <div className='scroll-section' id='scroll-section-1' ref={container}>
