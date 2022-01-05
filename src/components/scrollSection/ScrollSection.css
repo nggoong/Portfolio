@@ -23,6 +23,7 @@
     line-height: 1.4;
     font-weight: bold;
     text-align: center;
+    
 }
 
 .sticky-elem {
@@ -30,4 +31,5 @@
     width: 100%;
     top: 0;
     left: 0;
+    opacity: 0;
 }

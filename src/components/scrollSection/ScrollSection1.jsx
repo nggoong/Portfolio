@@ -1,7 +1,7 @@
 import './ScrollSection.css';
 import React, { useRef, useEffect } from 'react';
 import SceneInfo from '../../SceneInfo';
-import { setLayout } from '../../funcs/funcs';
+import { setLayout, calcValues } from '../../funcs/funcs';
 
 const ScrollSection1 = () => {
 
@@ -17,10 +17,59 @@ const ScrollSection1 = () => {
         window.addEventListener('resize', ()=> {
             console.log('resize!');
             setLayout(0, container);
+        });
+        window.addEventListener('scroll', ()=> {
+            playAnimation(0)
         })
+
+        return()=> {
+            window.removeEventListener('resize');
+            window.removeEventListener('scroll');
+        }
     }, []);
 
-    
+    const playAnimation = (index) => {
+        const values = SceneInfo[index].values;
+        const currentYOffset = window.pageYOffset;
+        const scrollHeight = SceneInfo[index].scrollHeight;
+        const scrollRatio = currentYOffset / scrollHeight;
+
+        switch(index) {
+            case 0:
+
+				if (scrollRatio <= 0.125) {
+					// in
+					messageA.current.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset, 0);
+					messageA.current.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset, 0)}%, 0)`;
+				} else {
+					// out
+					messageA.current.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset, 0);
+					messageA.current.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset, 0)}%, 0)`;
+				}
+
+				if (scrollRatio <= 0.42) {
+					// in
+					messageB.current.style.opacity = calcValues(values.messageB_opacity_in, currentYOffset, 0);
+					messageB.current.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_in, currentYOffset, 0)}%, 0)`;
+				} else {
+					// out
+					messageB.current.style.opacity = calcValues(values.messageB_opacity_out, currentYOffset, 0);
+					messageB.current.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_out, currentYOffset, 0)}%, 0)`;
+				}
+
+				if (scrollRatio <= 0.62) {
+					// in
+					messageC.current.style.opacity = calcValues(values.messageC_opacity_in, currentYOffset, 0);
+					messageC.current.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentYOffset, 0)}%, 0)`;
+				} else {
+					// out
+					messageC.current.style.opacity = calcValues(values.messageC_opacity_out, currentYOffset, 0);
+					messageC.current.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_out, currentYOffset, 0)}%, 0)`;
+				}
+
+				break;
+            }
+    }
 
     return(
         <div className='scroll-section' id='scroll-section-1' ref={container}>
