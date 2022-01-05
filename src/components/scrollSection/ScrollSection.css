@@ -7,6 +7,8 @@
     top: -10vh;
     text-align: center;
     font-size: 4rem;
+    transition: all;
+    transition-duration: 0.5s;
 }
 
 #scroll-section-1 .main-message {
@@ -16,6 +18,8 @@
     top: 45vh;
     height: 3em;
     font-size: 2rem;
+    /* transition: all;
+    transition-duration: 0.5s; */
 }
 
 .main-message p {
@@ -36,7 +40,8 @@
 
 @media (min-width:1024px) {
     #scroll-section-1 h1 {
-        font-size:5rem;
+        font-size:7rem;
+        top:-13vh;
     }
     #scroll-section-1 .main-message {
         font-size:2.8rem;

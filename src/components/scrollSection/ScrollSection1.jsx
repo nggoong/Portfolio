@@ -1,25 +1,37 @@
 import './ScrollSection.css';
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import SceneInfo from '../../SceneInfo';
 import { setLayout, calcValues } from '../../funcs/funcs';
 
 const ScrollSection1 = () => {
 
     const container = useRef();
+    const canvas = useRef();
     const messageA = useRef();
     const messageB = useRef();
     const messageC = useRef();
 
+    let imgElem;
+
 
     //forwardRef()를 사용하여 ref를 props로 전달 할 수 있는 방법을 추후 고려
     useEffect(()=> {
+        // setCanvasImages();
+        if(!canvas) return;
+        const context = canvas.current.getContext('2d');
+        imgElem = new Image();
+        imgElem.src = '../../images/blend-image-2.jpg';
+        imgElem.onload = function() {
+            context.drawImage(imgElem, 0, 0);
+        }
         setLayout(0, container);
+
         window.addEventListener('resize', ()=> {
             console.log('resize!');
             setLayout(0, container);
         });
         window.addEventListener('scroll', ()=> {
-            playAnimation(0)
+            playAnimation(0);
         })
 
         return()=> {
@@ -28,11 +40,50 @@ const ScrollSection1 = () => {
         }
     }, []);
 
+    
+
+    const setCanvasImages = () => {
+        const context = canvas.current.getContext('2d');
+        imgElem = new Image();
+        imgElem.src = '../../images/blend-image-2.jpg';
+        imgElem.onload = function() {
+            // context.fillStyle = 'black';
+            context.drawImage(imgElem, 0, 0);
+        }
+        // for(let i = 0; i<SceneInfo[0].values.imagePath.length; i++) {
+        //     imgElem = new Image();
+        //     imgElem.src = SceneInfo[0].values.imagePath[i];
+        //     SceneInfo[0].values.images.push(imgElem);
+        // }
+    }
+
     const playAnimation = (index) => {
         const values = SceneInfo[index].values;
         const currentYOffset = window.pageYOffset;
         const scrollHeight = SceneInfo[index].scrollHeight;
         const scrollRatio = currentYOffset / scrollHeight;
+        const widthRatio = window.innerHeight / canvas.current.width;
+        const heightRatio = window.innerHeight / canvas.current.height;
+        const context = canvas.current.getContext('2d');
+        let canvasScaleRatio;
+
+        if(widthRatio <= heightRatio) {
+            // 길이가 긴 부분을 ratio로 잡아야 다른 부분이 잘리지 않음
+            canvasScaleRatio = heightRatio;
+            console.log(heightRatio);
+        }
+
+        else if(heightRatio < widthRatio) {
+            canvasScaleRatio = widthRatio;
+            console.log(widthRatio);
+        }
+        console.log(canvas);
+
+        canvas.current.style.transform = `scale(${canvasScaleRatio})`;
+        // context.fillStyle = 'black';
+        // context.drawImage(imgElem, 0, 0);
+
+       
 
         switch(index) {
             case 0:
@@ -83,6 +134,8 @@ const ScrollSection1 = () => {
             <div className='sticky-elem main-message' ref={messageC}>
                 <p>권익주 입니다.</p>
             </div>
+            <canvas className="image-blend-canvas" width='1920' height='1080' ref={canvas}> 
+            </canvas>
         </div>
     )
 }
