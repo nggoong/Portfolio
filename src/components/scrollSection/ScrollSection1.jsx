@@ -1,6 +1,6 @@
 import './ScrollSection.css';
 import React, { useRef, useEffect } from 'react';
-// import SceneInfo from '../../SceneInfo';
+import SceneInfo from '../../SceneInfo';
 import { setLayout } from '../../funcs/funcs';
 
 const ScrollSection1 = () => {
@@ -11,9 +11,16 @@ const ScrollSection1 = () => {
     const messageC = useRef();
 
 
+    //forwardRef()를 사용하여 ref를 props로 전달 할 수 있는 방법을 추후 고려
     useEffect(()=> {
         setLayout(0, container);
+        window.addEventListener('resize', ()=> {
+            console.log('resize!');
+            setLayout(0, container);
+        })
     }, []);
+
+    
 
     return(
         <div className='scroll-section' id='scroll-section-1' ref={container}>
