@@ -1,13 +1,12 @@
 .scroll-section {
     padding-top: 50vh;
-    width:100%;
 }
 
 #scroll-section-1 h1 {
     position: relative;
     top: -10vh;
     text-align: center;
-    font-size: 5rem;
+    font-size: 4rem;
 }
 
 #scroll-section-1 .main-message {
@@ -16,14 +15,13 @@
     align-items: center;
     top: 45vh;
     height: 3em;
-    font-size: 2.2rem;
+    font-size: 2rem;
 }
 
 .main-message p {
     line-height: 1.4;
     font-weight: bold;
     text-align: center;
-    
 }
 
 .sticky-elem {
@@ -32,4 +30,15 @@
     top: 0;
     left: 0;
     opacity: 0;
+}
+
+
+
+@media (min-width:1024px) {
+    #scroll-section-1 h1 {
+        font-size:5rem;
+    }
+    #scroll-section-1 .main-message {
+        font-size:2.8rem;
+    }
 }

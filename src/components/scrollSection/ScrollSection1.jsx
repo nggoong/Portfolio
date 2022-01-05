@@ -37,7 +37,7 @@ const ScrollSection1 = () => {
         switch(index) {
             case 0:
 
-				if (scrollRatio <= 0.125) {
+				if (scrollRatio <= 0.105) {
 					// in
 					messageA.current.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset, 0);
 					messageA.current.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset, 0)}%, 0)`;
@@ -47,7 +47,7 @@ const ScrollSection1 = () => {
 					messageA.current.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset, 0)}%, 0)`;
 				}
 
-				if (scrollRatio <= 0.42) {
+				if (scrollRatio <= 0.305) {
 					// in
 					messageB.current.style.opacity = calcValues(values.messageB_opacity_in, currentYOffset, 0);
 					messageB.current.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_in, currentYOffset, 0)}%, 0)`;
@@ -57,7 +57,7 @@ const ScrollSection1 = () => {
 					messageB.current.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_out, currentYOffset, 0)}%, 0)`;
 				}
 
-				if (scrollRatio <= 0.62) {
+				if (scrollRatio <= 0.505) {
 					// in
 					messageC.current.style.opacity = calcValues(values.messageC_opacity_in, currentYOffset, 0);
 					messageC.current.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentYOffset, 0)}%, 0)`;
@@ -81,7 +81,7 @@ const ScrollSection1 = () => {
                 <p>유능한 프론트엔드<br/>개발자가 되고 싶은 </p>
             </div>
             <div className='sticky-elem main-message' ref={messageC}>
-                <p>Kwon Ik Joo<br/>입니다.</p>
+                <p>권익주 입니다.</p>
             </div>
         </div>
     )

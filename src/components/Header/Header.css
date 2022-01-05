@@ -7,7 +7,7 @@ a {
   }
   
   .global-nav {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
@@ -24,10 +24,11 @@ a {
     height: 100%;
     margin: 0 auto;
     user-select: none;
+    padding:0 1rem;
   }
   
   .local-nav {
-    position: absolute;
+    position: fixed;
     z-index:10;
     top: 45px;
     left: 0;
@@ -52,4 +53,13 @@ a {
   
   .local-nav-links a:not(.logo-name) {
     margin-left: 2em;
+  }
+
+
+
+  @media (min-width:1024px) {
+    .global-nav-links,
+    .local-nav-links {
+      padding:0;
+    }
   }
