@@ -36,6 +36,14 @@
     opacity: 0;
 }
 
+.image-blend-canvas {
+    position:relative;
+    z-index:111;
+}
+
+
+
+
 
 
 @media (min-width:1024px) {

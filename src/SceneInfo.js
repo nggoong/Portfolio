@@ -18,7 +18,7 @@ const SceneInfo = [
                 messageB_translateY_out: [0, -20, { start: 0.31, end: 0.4 }],
                 messageC_translateY_out: [0, -20, { start: 0.51, end: 0.6 }],
                 imagePath: [
-                    './tempImage.jpg'
+                    '../../images/tempImage/jpg'
                     
                 ],
                 images:[]

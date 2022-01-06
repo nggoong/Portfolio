@@ -3,7 +3,7 @@ import './Header.css';
 
 const Header = ()=> {
     return(
-        <div className='header-container'>
+        <>
         <nav className="global-nav">
 			<div className="global-nav-links">
 				<a href="temp" className="global-nav-item">Introduction</a>
@@ -20,7 +20,7 @@ const Header = ()=> {
 				<a href="https://www.instagram.com/apro_xo/?hl=ko" target='blank'>Instagram</a>
 			</div>
 		</nav>
-    </div>
+    </>
     )
 }
 

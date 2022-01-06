@@ -57,8 +57,7 @@ a {
 
 
   @media (min-width:1024px) {
-    .global-nav-links,
     .local-nav-links {
-      padding:0;
+      padding-left:1rem;
     }
   }

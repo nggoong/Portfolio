@@ -10,21 +10,22 @@ const ScrollSection1 = () => {
     const messageA = useRef();
     const messageB = useRef();
     const messageC = useRef();
+    // let context;
 
-    let imgElem;
+    
+
 
 
     //forwardRef()를 사용하여 ref를 props로 전달 할 수 있는 방법을 추후 고려
     useEffect(()=> {
-        // setCanvasImages();
-        if(!canvas) return;
-        const context = canvas.current.getContext('2d');
-        imgElem = new Image();
-        imgElem.src = '../../images/blend-image-2.jpg';
-        imgElem.onload = function() {
-            context.drawImage(imgElem, 0, 0);
-        }
+        
         setLayout(0, container);
+        
+        // window.onload = () => {
+        //     setCanvasImages();
+        //     const context = canvas.current.getContext('2d');
+        //     context.drawImage(SceneInfo[0].values.images[0], 0, 0);
+        // }
 
         window.addEventListener('resize', ()=> {
             console.log('resize!');
@@ -40,86 +41,70 @@ const ScrollSection1 = () => {
         }
     }, []);
 
+
+    // const setCanvasImages = () => {
+    //     let imageElem;
+        
+    //     for(let i = 0; i<1; i++) {
+    //         imageElem = new Image();
+    //         imageElem.src = '../../images/tempImage.jpg';
+    //         SceneInfo[0].values.images.push(imageElem);
+            
+    //     }
+    // }
+
     
 
-    const setCanvasImages = () => {
-        const context = canvas.current.getContext('2d');
-        imgElem = new Image();
-        imgElem.src = '../../images/blend-image-2.jpg';
-        imgElem.onload = function() {
-            // context.fillStyle = 'black';
-            context.drawImage(imgElem, 0, 0);
-        }
-        // for(let i = 0; i<SceneInfo[0].values.imagePath.length; i++) {
-        //     imgElem = new Image();
-        //     imgElem.src = SceneInfo[0].values.imagePath[i];
-        //     SceneInfo[0].values.images.push(imgElem);
-        // }
-    }
-
-    const playAnimation = (index) => {
-        const values = SceneInfo[index].values;
+    const playAnimation = () => {
+        const values = SceneInfo[0].values;
         const currentYOffset = window.pageYOffset;
-        const scrollHeight = SceneInfo[index].scrollHeight;
+        const scrollHeight = SceneInfo[0].scrollHeight;
         const scrollRatio = currentYOffset / scrollHeight;
-        const widthRatio = window.innerHeight / canvas.current.width;
-        const heightRatio = window.innerHeight / canvas.current.height;
-        const context = canvas.current.getContext('2d');
-        let canvasScaleRatio;
-
-        if(widthRatio <= heightRatio) {
-            // 길이가 긴 부분을 ratio로 잡아야 다른 부분이 잘리지 않음
-            canvasScaleRatio = heightRatio;
-            console.log(heightRatio);
+        let imageElem = new Image();
+        imageElem.src='https://e7.pngegg.com/pngimages/944/968/png-clipart-donuts-homer-simpson-the-simpsons-ride-lisa-simpson-bart-simpson-bart-simpson-donuts-homer-simpson-thumbnail.png';
+        imageElem.onload = function() {
+            const context = canvas.current.getContext('2d');
+            context.drawImage(imageElem, 0, 0);
         }
 
-        else if(heightRatio < widthRatio) {
-            canvasScaleRatio = widthRatio;
-            console.log(widthRatio);
+        
+
+
+        // const context = canvas.current.getContext('2d');
+        // context.drawImage(values.images[0], 0, 0);
+        
+        if (scrollRatio <= 0.105) {
+            // in
+            messageA.current.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset, 0);
+            messageA.current.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset, 0)}%, 0)`;
+        } else {
+            // out
+            messageA.current.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset, 0);
+            messageA.current.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset, 0)}%, 0)`;
         }
-        console.log(canvas);
 
-        canvas.current.style.transform = `scale(${canvasScaleRatio})`;
-        // context.fillStyle = 'black';
-        // context.drawImage(imgElem, 0, 0);
+        if (scrollRatio <= 0.305) {
+            // in
+            messageB.current.style.opacity = calcValues(values.messageB_opacity_in, currentYOffset, 0);
+            messageB.current.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_in, currentYOffset, 0)}%, 0)`;
+        } else {
+            // out
+            messageB.current.style.opacity = calcValues(values.messageB_opacity_out, currentYOffset, 0);
+            messageB.current.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_out, currentYOffset, 0)}%, 0)`;
+        }
 
-       
+        if (scrollRatio <= 0.505) {
+            // in
+            messageC.current.style.opacity = calcValues(values.messageC_opacity_in, currentYOffset, 0);
+            messageC.current.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentYOffset, 0)}%, 0)`;
+        } else {
+            // out
+            messageC.current.style.opacity = calcValues(values.messageC_opacity_out, currentYOffset, 0);
+            messageC.current.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_out, currentYOffset, 0)}%, 0)`;
+        }
 
-        switch(index) {
-            case 0:
 
-				if (scrollRatio <= 0.105) {
-					// in
-					messageA.current.style.opacity = calcValues(values.messageA_opacity_in, currentYOffset, 0);
-					messageA.current.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_in, currentYOffset, 0)}%, 0)`;
-				} else {
-					// out
-					messageA.current.style.opacity = calcValues(values.messageA_opacity_out, currentYOffset, 0);
-					messageA.current.style.transform = `translate3d(0, ${calcValues(values.messageA_translateY_out, currentYOffset, 0)}%, 0)`;
-				}
-
-				if (scrollRatio <= 0.305) {
-					// in
-					messageB.current.style.opacity = calcValues(values.messageB_opacity_in, currentYOffset, 0);
-					messageB.current.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_in, currentYOffset, 0)}%, 0)`;
-				} else {
-					// out
-					messageB.current.style.opacity = calcValues(values.messageB_opacity_out, currentYOffset, 0);
-					messageB.current.style.transform = `translate3d(0, ${calcValues(values.messageB_translateY_out, currentYOffset, 0)}%, 0)`;
-				}
-
-				if (scrollRatio <= 0.505) {
-					// in
-					messageC.current.style.opacity = calcValues(values.messageC_opacity_in, currentYOffset, 0);
-					messageC.current.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_in, currentYOffset, 0)}%, 0)`;
-				} else {
-					// out
-					messageC.current.style.opacity = calcValues(values.messageC_opacity_out, currentYOffset, 0);
-					messageC.current.style.transform = `translate3d(0, ${calcValues(values.messageC_translateY_out, currentYOffset, 0)}%, 0)`;
-				}
-
-				break;
-            }
+				
     }
 
     return(
