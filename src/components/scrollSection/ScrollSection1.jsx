@@ -2,7 +2,7 @@ import './ScrollSection.css';
 import React, { useRef, useEffect, useState } from 'react';
 import SceneInfo from '../../SceneInfo';
 import { setLayout, calcValues } from '../../funcs/funcs';
-import firstBlendImage from '../../images/tempImage.jpg';
+import firstBlendImage from '../../images/canvasBlendImage-1.jpg';
 import secondBlendImage from '../../images/pngegg.png';
 
 const ScrollSection1 = () => {
@@ -41,6 +41,7 @@ const ScrollSection1 = () => {
         window.addEventListener('resize', ()=> {
             console.log('resize!');
             setLayout(0, container);
+            playAnimation(0);
             canvas.current.style.maginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
         });
         window.addEventListener('scroll', ()=> {
@@ -123,6 +124,17 @@ const ScrollSection1 = () => {
             parseInt(whiteRectWidth),
             canvas.current.height
         );
+
+        if(scrollRatio < values.rect1X[2].end) {
+            console.log('캔버스 닿기 전');
+            canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
+            canvas.current.classList.remove('sticky');
+        }
+        else {
+            console.log('캔버스 닿은 후');
+            canvas.current.style.marginTop = 0;
+            canvas.current.classList.add('sticky');
+        }
 
         
         if (scrollRatio <= 0.105) {
