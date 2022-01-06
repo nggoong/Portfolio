@@ -2,6 +2,7 @@ import './ScrollSection.css';
 import React, { useRef, useEffect, useState } from 'react';
 import SceneInfo from '../../SceneInfo';
 import { setLayout, calcValues } from '../../funcs/funcs';
+import blendImage from '../../images/tempImage.jpg';
 
 const ScrollSection1 = () => {
 
@@ -20,6 +21,8 @@ const ScrollSection1 = () => {
     useEffect(()=> {
         
         setLayout(0, container);
+        canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
+        playAnimation(0);
         
         // window.onload = () => {
         //     setCanvasImages();
@@ -30,6 +33,7 @@ const ScrollSection1 = () => {
         window.addEventListener('resize', ()=> {
             console.log('resize!');
             setLayout(0, container);
+            canvas.current.style.maginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
         });
         window.addEventListener('scroll', ()=> {
             playAnimation(0);
@@ -65,17 +69,15 @@ const ScrollSection1 = () => {
         let canvasScaleRatio;
         let imageElem = new Image();
         const context = canvas.current.getContext('2d');
-        imageElem.src='https://e7.pngegg.com/pngimages/487/650/png-clipart-sea-sea-sea-%E2%80%8B%E2%80%8Blevel-sea-thumbnail.png';
+        imageElem.src= blendImage;
 
         if(widthRatio <= heightRatio) {
             // 캔버스보다 브라우저 창이 홀쭉한 경우
             canvasScaleRatio = heightRatio;
-            console.log('heightRatio로 결정');
         }
         else {
             // 캔버스보다 브라우저 창이 납작한 경우
             canvasScaleRatio = widthRatio;
-            console.log('widthRatio로 결정');
         }
 
         canvas.current.style.transform = `scale(${canvasScaleRatio})`;
@@ -85,8 +87,36 @@ const ScrollSection1 = () => {
             context.fillStyle = 'black';
             context.drawImage(imageElem, 0, 0);
         }
+        const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
+        const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
 
-        
+        if (!values.rectStartY) {
+            // values.rectStartY = objs.canvas.getBoundingClientRect().top;
+            values.rectStartY = canvas.current.offsetTop + (canvas.current.height - canvas.current.height * canvasScaleRatio) / 2;
+            values.rect1X[2].start = (window.innerHeight / 2) / scrollHeight;
+            values.rect2X[2].start = (window.innerHeight / 2) / scrollHeight;
+            values.rect1X[2].end = values.rectStartY / scrollHeight;
+            values.rect2X[2].end = values.rectStartY / scrollHeight;
+        }
+
+        const whiteRectWidth = recalculatedInnerWidth * 0.15;
+        values.rect1X[0] = (canvas.current.width - recalculatedInnerWidth) / 2
+        values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
+        values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
+        values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
+
+        context.fillRect(
+            parseInt(calcValues(values.rect1X, currentYOffset, 0)),
+            0,
+            parseInt(whiteRectWidth),
+            canvas.current.height
+        );
+        context.fillRect(
+            parseInt(calcValues(values.rect2X, currentYOffset, 0)),
+            0,
+            parseInt(whiteRectWidth),
+            canvas.current.height
+        );
 
 
         // const context = canvas.current.getContext('2d');

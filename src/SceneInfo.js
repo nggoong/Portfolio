@@ -21,7 +21,12 @@ const SceneInfo = [
                     '../../images/tempImage/jpg'
                     
                 ],
-                images:[]
+                images:[],
+                rect1X: [0, 0, {start: 0, end: 0}],
+                rect2X: [0, 0, {start: 0, end: 0}],
+                blendHeight: [0, 0, {start: 0, end: 0}],
+                canvas_scale: [0, 0, {start: 0, end: 0}],
+                rectStartY: 0
         }
     }
 ];
