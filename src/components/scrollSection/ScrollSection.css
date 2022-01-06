@@ -2,6 +2,12 @@
     padding-top: 50vh;
 }
 
+#scroll-section-1 {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 #scroll-section-1 h1 {
     position: relative;
     top: -10vh;
@@ -37,8 +43,7 @@
 }
 
 .image-blend-canvas {
-    position:relative;
-    z-index:111;
+    background:blue;
 }
 
 
