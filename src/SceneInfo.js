@@ -1,3 +1,5 @@
+import firstBlendImage from './images/canvasBlendImage-1.jpg';
+import secondBlendImage from './images/canvasBlendImage-2.jpg';
 
 const SceneInfo = [
     {
@@ -18,7 +20,8 @@ const SceneInfo = [
                 messageB_translateY_out: [0, -20, { start: 0.31, end: 0.4 }],
                 messageC_translateY_out: [0, -20, { start: 0.51, end: 0.6 }],
                 imagePath: [
-                    '../../images/tempImage/jpg'
+                    firstBlendImage,
+                    secondBlendImage
                     
                 ],
                 images:[],

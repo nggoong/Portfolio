@@ -3,7 +3,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import SceneInfo from '../../SceneInfo';
 import { setLayout, calcValues } from '../../funcs/funcs';
 import firstBlendImage from '../../images/canvasBlendImage-1.jpg';
-import secondBlendImage from '../../images/pngegg.png';
+import secondBlendImage from '../../images/canvasBlendImage-2.jpg';
 
 const ScrollSection1 = () => {
 
@@ -15,6 +15,7 @@ const ScrollSection1 = () => {
     // let context;
 
     let imageElem;
+    let imageElem2;
 
     
 
@@ -23,13 +24,14 @@ const ScrollSection1 = () => {
     //forwardRef()를 사용하여 ref를 props로 전달 할 수 있는 방법을 추후 고려
     useEffect(()=> {
         const context = canvas.current.getContext('2d');
-
+        
+        window.addEventListener('load', ()=>{
+            setCanvasImages();
+            context.drawImage(imageElem, 0, 0);
+        })
         setLayout(0, container);
         canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
-        setCanvasImages();
-        imageElem.onload = () => {
-            context.drawImage(SceneInfo[0].values.images[0], 0, 0);
-        }
+        
         playAnimation(0);
         
         // window.onload = () => {
@@ -56,11 +58,10 @@ const ScrollSection1 = () => {
 
 
     const setCanvasImages = () => {
-        for(let i = 0; i<1; i++) {
-            imageElem = new Image();
-            imageElem.src = firstBlendImage;
-            SceneInfo[0].values.images.push(imageElem);
-        }
+        imageElem = new Image();
+        imageElem2 = new Image();
+        imageElem.src = firstBlendImage;
+        imageElem2.src = secondBlendImage;
         
     }
 
@@ -74,9 +75,14 @@ const ScrollSection1 = () => {
         const widthRatio = window.innerWidth / canvas.current.width;
         const heightRatio = window.innerHeight / canvas.current.height;
         let canvasScaleRatio;
-        let imageElem = new Image();
+
         const context = canvas.current.getContext('2d');
-        imageElem.src= firstBlendImage;
+
+        let imageElem = new Image();
+        let imageElem2 = new Image();
+        
+        imageElem.src= values.imagePath[0];
+        imageElem2.src = values.imagePath[1];
 
         if(widthRatio <= heightRatio) {
             // 캔버스보다 브라우저 창이 홀쭉한 경우
@@ -131,7 +137,18 @@ const ScrollSection1 = () => {
             canvas.current.classList.remove('sticky');
         }
         else {
-            console.log('캔버스 닿은 후');
+            values.blendHeight[0] = 0;
+            values.blendHeight[1] = canvas.current.height;
+            values.blendHeight[2].start = values.rect1X[2].end;
+            values.blendHeight[2].end = values.blendHeight[2].start + 0.15;
+            console.log(scrollRatio);
+            const blendHeight = calcValues(values.blendHeight, currentYOffset, 0);
+            context.drawImage(imageElem2,
+                0, canvas.current.height - blendHeight, canvas.current.width, blendHeight,
+                0, canvas.current.height - blendHeight, canvas.current.width, blendHeight
+            );
+
+            console.log('블렌드');
             canvas.current.style.marginTop = 0;
             canvas.current.classList.add('sticky');
             canvas.current.style.top = `${-(canvas.current.height - canvas.current.height * canvasScaleRatio) / 2}px`;
