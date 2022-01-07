@@ -134,6 +134,7 @@ const ScrollSection1 = () => {
             console.log('캔버스 닿은 후');
             canvas.current.style.marginTop = 0;
             canvas.current.classList.add('sticky');
+            canvas.current.style.top = `${-(canvas.current.height - canvas.current.height * canvasScaleRatio) / 2}px`;
         }
 
         
@@ -178,10 +179,10 @@ const ScrollSection1 = () => {
                 <p>간단하면서 사용자 친화적인<br/>디자인을 추구하며 </p>
             </div>
             <div className='sticky-elem main-message' ref={messageB}>
-                <p>유능한 프론트엔드<br/>개발자가 되고 싶은 </p>
+                <p>끊임 없이 성장하는<br/>개발자가 되고 싶은 </p>
             </div>
             <div className='sticky-elem main-message' ref={messageC}>
-                <p>권익주 입니다.</p>
+                <p>"성장하는 프론트엔드 개발자"<br/>권익주 입니다.</p>
             </div>
             <canvas className="image-blend-canvas" width='1920' height='1080' ref={canvas}> 
             </canvas>
