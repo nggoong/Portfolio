@@ -33,12 +33,6 @@ const ScrollSection1 = () => {
         canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
         
         playAnimation(0);
-        
-        // window.onload = () => {
-        //     setCanvasImages();
-        //     const context = canvas.current.getContext('2d');
-        //     context.drawImage(SceneInfo[0].values.images[0], 0, 0);
-        // }
 
         window.addEventListener('resize', ()=> {
             console.log('resize!');
@@ -58,6 +52,12 @@ const ScrollSection1 = () => {
 
 
     const setCanvasImages = () => {
+        // let imageElem3;
+        // for (let i = 0; i<SceneInfo[0].values.imagePath.length; i++) {
+        //     imageElem3 = new Image();
+        //     imageElem3.src = SceneInfo.values.imagePath[i];
+        //     SceneInfo[0].values.images.push(imageElem3);
+        // }
         imageElem = new Image();
         imageElem2 = new Image();
         imageElem.src = firstBlendImage;
@@ -101,7 +101,6 @@ const ScrollSection1 = () => {
         const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
 
         if (!values.rectStartY) {
-            // values.rectStartY = objs.canvas.getBoundingClientRect().top;
             values.rectStartY = canvas.current.offsetTop + (canvas.current.height - canvas.current.height * canvasScaleRatio) / 2;
             values.rect1X[2].start = (window.innerHeight / 2) / scrollHeight;
             values.rect2X[2].start = (window.innerHeight / 2) / scrollHeight;
@@ -115,8 +114,6 @@ const ScrollSection1 = () => {
         values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
         values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
 
-        // context.fillRect(values.rect1X[0], 0, parseInt(whiteRectWidth), canvas.current.height);
-        // context.fillRect(values.rect2X[0], 0, parseInt(whiteRectWidth), canvas.current.height);
 
         context.fillRect(
             parseInt(calcValues(values.rect1X, currentYOffset, 0)),
