@@ -149,6 +149,17 @@ const ScrollSection1 = () => {
             canvas.current.style.marginTop = 0;
             canvas.current.classList.add('sticky');
             canvas.current.style.top = `${-(canvas.current.height - canvas.current.height * canvasScaleRatio) / 2}px`;
+
+            if(scrollRatio > values.blendHeight[2].end) {
+                values.canvas_scale[0] = canvasScaleRatio;
+                values.canvas_scale[1] = document.body.offsetWidth / (1.5* canvas.current.width);
+
+                values.canvas_scale[2].start = values.blendHeight[2].end;
+                values.canvas_scale[2].end = values.canvas_scale[2].start + 0.15;
+
+                canvas.current.style.transform = `scale(${calcValues(values.canvas_scale, currentYOffset, 0)})`;
+                
+            }
         }
 
         
