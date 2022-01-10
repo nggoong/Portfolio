@@ -39,16 +39,19 @@ const ScrollSection1 = () => {
             setLayout(0, container);
             playAnimation(0);
             canvas.current.style.maginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
+            console.log('resize event')
         });
         window.addEventListener('scroll', ()=> {
             playAnimation(0);
+            console.log('scrollevent');
         })
 
         return()=> {
+            window.removeEventListener('load');
             window.removeEventListener('resize');
             window.removeEventListener('scroll');
         }
-    }, []);
+    });
 
 
     const setCanvasImages = () => {

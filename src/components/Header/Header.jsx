@@ -1,15 +1,16 @@
 import React from 'react';
 import './Header.css';
+import { Link } from 'react-router-dom';
 
 const Header = ()=> {
     return(
         <>
         <nav className="global-nav">
 			<div className="global-nav-links">
-				<a href="temp" className="global-nav-item">Introduction</a>
-				<a href="temp" className="global-nav-item">Skills</a>
-				<a href="temp" className="global-nav-item">Projects</a>
-				<a href="temp" className="global-nav-item">Contact</a>
+				<Link to={'/intro'} className='global-nav-item'>Introduction</Link>
+				<Link to={'/skills'} className='global-nav-item'>Skills</Link>
+				<Link to={'/projects'} className='global-nav-item'>Projects</Link>
+				<Link to={'/contact'} className='global-nav-item'>Contact</Link>
 			</div>
 		</nav>
 		<nav className="local-nav">
