@@ -17,41 +17,44 @@ const ScrollSection1 = () => {
     let imageElem;
     let imageElem2;
 
-    
-
-
-
     //forwardRef()를 사용하여 ref를 props로 전달 할 수 있는 방법을 추후 고려
     useEffect(()=> {
         const context = canvas.current.getContext('2d');
-        
-        window.addEventListener('load', ()=>{
-            setCanvasImages();
-            context.drawImage(imageElem, 0, 0);
-        })
         setLayout(0, container);
         canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
-        
         playAnimation(0);
+        
+        window.addEventListener('load', loadEventListener(context));
+        window.addEventListener('resize', resizeEventListener);
+        window.addEventListener('scroll', scrollEventListener);
 
-        window.addEventListener('resize', ()=> {
-            console.log('resize!');
-            setLayout(0, container);
-            playAnimation(0);
-            canvas.current.style.maginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
-            console.log('resize event')
-        });
-        window.addEventListener('scroll', ()=> {
-            playAnimation(0);
-            console.log('scrollevent');
-        })
+        
 
         return()=> {
-            window.removeEventListener('load');
-            window.removeEventListener('resize');
-            window.removeEventListener('scroll');
+            window.removeEventListener('load', loadEventListener);
+            window.removeEventListener('resize', resizeEventListener);
+            window.removeEventListener('scroll', scrollEventListener);
         }
     });
+
+    const loadEventListener = (context) => {
+        setCanvasImages();
+        context.drawImage(imageElem, 0, 0);
+        console.log('load');
+    }
+
+    const resizeEventListener = () => {
+        console.log('resize!');
+        setLayout(0, container);
+        playAnimation(0);
+        canvas.current.style.maginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
+        console.log('resize event')
+    }
+    
+    const scrollEventListener = () => {
+        playAnimation(0);
+        console.log('scrollevent');
+    }
 
 
     const setCanvasImages = () => {
