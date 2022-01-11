@@ -14,7 +14,7 @@ function App() {
     <Header></Header>
       <Switch>
         <Route exact path="/" component={ScrollSection1}/>
-        <Route path="/intro" component={ScrollSection2}/>
+        <Route path="/about-me" component={ScrollSection2}/>
         <Route path="/skills" component={ScrollSection3}/>
         <Route path="/projects" component={ScrollSection4}/>
         <Route path="/contact" component={ScrollSection5}/>

@@ -1,11 +1,14 @@
-.scroll-section {
-    padding-top: 50vh;
+:root {
+    --gray-color:#8d8d8d;
+    --bg-gray-color:#eeeeee
 }
+
 
 #scroll-section-1 {
     display:flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 50vh;
 }
 
 #scroll-section-1 h1 {
@@ -44,13 +47,45 @@
 }
 
 .image-blend-canvas.sticky {
-    /* background:blue; */
     position:fixed;
     margin-top:0;
     top:0;
 }
 
+#scroll-section-2 {
+    padding-top:20vh;
+    background:var(--bg-gray-color);
+}
 
+#scroll-section-2 > .tile-container {
+    margin:0 auto;
+    width:100%;
+    max-width:1000px;
+    position:relative;
+    background:white;
+    border-radius: 20px;
+}
+
+.large-tile-title > h1 {
+    font-size:2rem;
+}
+.large-tile-content > p {
+    font-size:1.5rem;
+}
+
+.large-tile-container {
+    display:flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height:70vh;
+}
+
+.large-tile-content {
+    position: absolute;
+    text-align: center;
+}
 
 
 
@@ -63,4 +98,8 @@
     #scroll-section-1 .main-message {
         font-size:2.8rem;
     }
+    .large-tile-title > h1 {
+        font-size:4rem;
+    }
+    
 }

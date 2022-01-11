@@ -28,8 +28,6 @@ const ScrollSection1 = () => {
         window.addEventListener('resize', resizeEventListener);
         window.addEventListener('scroll', scrollEventListener);
 
-        
-
         return()=> {
             window.removeEventListener('load', loadEventListener);
             window.removeEventListener('resize', resizeEventListener);
@@ -40,20 +38,17 @@ const ScrollSection1 = () => {
     const loadEventListener = (context) => {
         setCanvasImages();
         context.drawImage(imageElem, 0, 0);
-        console.log('load');
     }
 
     const resizeEventListener = () => {
-        console.log('resize!');
         setLayout(0, container);
         playAnimation(0);
         canvas.current.style.maginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
-        console.log('resize event')
     }
     
     const scrollEventListener = () => {
+        console.log('scroll');
         playAnimation(0);
-        console.log('scrollevent');
     }
 
 
@@ -104,7 +99,6 @@ const ScrollSection1 = () => {
         context.drawImage(imageElem, 0, 0);
 
         const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
-        const recalculatedInnerHeight = window.innerHeight / canvasScaleRatio;
 
         if (!values.rectStartY) {
             values.rectStartY = canvas.current.offsetTop + (canvas.current.height - canvas.current.height * canvasScaleRatio) / 2;
@@ -135,7 +129,6 @@ const ScrollSection1 = () => {
         );
 
         if(scrollRatio < values.rect1X[2].end) {
-            console.log('캔버스 닿기 전');
             canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
             canvas.current.classList.remove('sticky');
         }
@@ -144,14 +137,12 @@ const ScrollSection1 = () => {
             values.blendHeight[1] = canvas.current.height;
             values.blendHeight[2].start = values.rect1X[2].end;
             values.blendHeight[2].end = values.blendHeight[2].start + 0.15;
-            console.log(scrollRatio);
             const blendHeight = calcValues(values.blendHeight, currentYOffset, 0);
             context.drawImage(imageElem2,
                 0, canvas.current.height - blendHeight, canvas.current.width, blendHeight,
                 0, canvas.current.height - blendHeight, canvas.current.width, blendHeight
             );
 
-            console.log('블렌드');
             canvas.current.style.marginTop = 0;
             canvas.current.classList.add('sticky');
             canvas.current.style.top = `${-(canvas.current.height - canvas.current.height * canvasScaleRatio) / 2}px`;
@@ -210,7 +201,7 @@ const ScrollSection1 = () => {
                 <p>간단하면서 사용자 친화적인<br/>디자인을 추구하며 </p>
             </div>
             <div className='sticky-elem main-message' ref={messageB}>
-                <p>끊임 없이 성장하는<br/>개발자가 되고 싶은 </p>
+                <p>항상 배우는 자세, 낮은 자세로<br/>다가가겠습니다 </p>
             </div>
             <div className='sticky-elem main-message' ref={messageC}>
                 <p>"성장하는 프론트엔드 개발자"<br/>권익주 입니다.</p>

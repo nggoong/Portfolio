@@ -31,6 +31,14 @@ const SceneInfo = [
                 canvas_scale: [0, 0, {start: 0, end: 0}],
                 rectStartY: 0
         }
+    },
+    {
+        type:'normal',
+        scrollHeight:0,
+        values: {
+            large_title_opacity_out:[1, 0, {start:0, end: 0.02}],
+            large_content_opacity_in:[0, 1, {start:0.021, end:0.03}]
+        }
     }
 ];
 
