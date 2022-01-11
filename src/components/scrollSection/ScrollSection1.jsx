@@ -1,5 +1,5 @@
 import './ScrollSection.css';
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import SceneInfo from '../../SceneInfo';
 import { setLayout, calcValues } from '../../funcs/funcs';
 import firstBlendImage from '../../images/canvasBlendImage-1.jpg';

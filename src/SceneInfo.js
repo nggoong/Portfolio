@@ -33,11 +33,12 @@ const SceneInfo = [
         }
     },
     {
-        type:'normal',
+        type:'sticky',
+        heightNum:2,
         scrollHeight:0,
         values: {
-            large_title_opacity_out:[1, 0, {start:0, end: 0.02}],
-            large_content_opacity_in:[0, 1, {start:0.021, end:0.03}]
+            large_title_opacity_out:[1, 0, {start:0.01, end: 0.03}],
+            large_content_opacity_in:[0, 1, {start:0.03, end:0.06}]
         }
     }
 ];
