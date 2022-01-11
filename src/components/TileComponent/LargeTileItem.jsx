@@ -27,7 +27,7 @@ const LargeTileItem = ({ value, titleTiming, contentTiming }) => {
         return(()=> {
             window.removeEventListener('scroll', scrollEventListener);
         })
-    })
+    }, [])
 
     return(
         <>
@@ -36,7 +36,7 @@ const LargeTileItem = ({ value, titleTiming, contentTiming }) => {
                     <h1>{value.title}</h1>
                 </div>
                 <div className="large-tile-content" ref={contentRef}>
-                    <p>{value.content1}<br/>{value.content2}<br/>{value.content3}</p>   
+                    <pre>{value.content1}</pre>   
                 </div>
             </div>
         </>
