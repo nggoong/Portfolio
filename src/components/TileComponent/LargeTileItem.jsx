@@ -8,35 +8,38 @@ const LargeTileItem = ({ value, titleTiming, contentTiming }) => {
     const contentRef = useRef();
 
     const scrollEventListener = () => {
-        playAnimation();
+        const titleRef_current = titleRef.current;
+        const contentRef_current = contentRef.current;
+        playAnimation(titleRef_current, contentRef_current);
     }
 
-    const playAnimation = () => {
+    const playAnimation = (titleRef_current, contentRef_current) => {
         const values = SceneInfo[1].values;
         const currentYOffset = window.pageYOffset;
         const scrollHeight = SceneInfo[1].scrollHeight;
-        const scrollRatio = currentYOffset / scrollHeight;
+        // const scrollRatio = currentYOffset / scrollHeight;
 
-        titleRef.current.style.opacity = calcValues(values.large_title_opacity_out, currentYOffset, 1);
-        contentRef.current.style.opacity = calcValues(values.large_content_opacity_in, currentYOffset, 1);
+        titleRef_current.style.opacity = calcValues(values.large_title_opacity_out, currentYOffset, 1);
+        contentRef_current.style.opacity = calcValues(values.large_content_opacity_in, currentYOffset, 1);
     }
 
     useEffect(()=>{
+        
         window.addEventListener('scroll', scrollEventListener);
 
         return(()=> {
             window.removeEventListener('scroll', scrollEventListener);
         })
-    }, [])
+    })
 
     return(
         <>
             <div className="large-tile-container tile-container">
-                <div className="large-tile-title" ref={titleRef}>
+                <div className="large-tile-title tile-title" ref={titleRef}>
                     <h1>{value.title}</h1>
                 </div>
                 <div className="large-tile-content" ref={contentRef}>
-                    <pre>{value.content1}</pre>   
+                    <pre>{value.content}</pre>   
                 </div>
             </div>
         </>

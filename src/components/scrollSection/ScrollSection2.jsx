@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useCallback } from 'react';
 import { setLayout, calcValues } from '../../funcs/funcs';
 import LargeTileItem from '../TileComponent/LargeTileItem';
 import LargeTileValues from '../../LargeTileValues';
+import SmallTileItem from '../TileComponent/SmallTileItem';
 import { useLocation } from 'react-router-dom';
 
 const ScrollSection2 = () => {
@@ -41,10 +42,9 @@ const ScrollSection2 = () => {
 
 
     return(
-        <div id="scroll-section-2" ref={container2}>
+        <div id="scroll-section-2" className='scroll-section' ref={container2}>
             <LargeTileItem value={LargeTileValues[0]}/>
-            
-            <LargeTileItem value={LargeTileValues[0]}></LargeTileItem>
+            <SmallTileItem value={LargeTileValues}/>
         </div>
     )
 }

@@ -22,13 +22,8 @@ const ScrollSection1 = () => {
     useEffect(()=> {
         setLayout(0, container1);
         canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
-        playAnimation(0);
 
-        return(()=> {
-            window.removeEventListener('load', loadEventListener);
-            window.removeEventListener('resize', resizeEventListener);
-            window.removeEventListener('scroll', scrollEventListener);
-        })
+        
     }, []);
 
     useEffect(()=> {
@@ -39,16 +34,15 @@ const ScrollSection1 = () => {
         const context = canvas.current.getContext('2d');
         window.addEventListener('load', loadEventListener(context));
         window.addEventListener('resize', resizeEventListener);
-        function addScrollEvent() {
-            window.addEventListener('scroll', scrollEventListener);
-        }
-        addScrollEvent();
+        window.addEventListener('scroll', scrollEventListener);
+        
+        
 
-    //     return()=> {
-    //         window.removeEventListener('load', loadEventListener);
-    //         window.removeEventListener('resize', resizeEventListener);
-    //         window.removeEventListener('scroll', scrollEventListener);
-    // }
+        return()=> {
+            window.removeEventListener('load', loadEventListener);
+            window.removeEventListener('resize', resizeEventListener);
+            window.removeEventListener('scroll', scrollEventListener);
+    }
 })
 
 
@@ -60,14 +54,19 @@ const ScrollSection1 = () => {
 
     const resizeEventListener = () => {
         setLayout(0, container1);
-        playAnimation(0);
+        // playAnimation();
         canvas.current.style.maginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
         console.log('resize [scrollsection1]')
     }
     
     const scrollEventListener = () => {
+        // const container1_current = container1.current;
+        // const messageA_current = messageA.current;
+        // const messageB_current = messageB.current;
+        // const messageC_current = messageC.current;
+        const canvas_current = canvas.current;
         console.log('scroll [scrollsection1]');
-        playAnimation(0);
+        playAnimation(canvas_current);
     }
     
 
@@ -88,16 +87,16 @@ const ScrollSection1 = () => {
 
     
 
-    const playAnimation = () => {
+    const playAnimation = (canvas_current) => {
         const values = SceneInfo[0].values;
         const currentYOffset = window.pageYOffset;
         const scrollHeight = SceneInfo[0].scrollHeight;
         const scrollRatio = currentYOffset / scrollHeight;
-        const widthRatio = window.innerWidth / canvas.current.width;
-        const heightRatio = window.innerHeight / canvas.current.height;
+        const widthRatio = window.innerWidth / canvas_current.width;
+        const heightRatio = window.innerHeight / canvas_current.height;
         let canvasScaleRatio;
 
-        const context = canvas.current.getContext('2d');
+        const context = canvas_current.getContext('2d');
 
         let imageElem = new Image();
         let imageElem2 = new Image();
@@ -114,14 +113,14 @@ const ScrollSection1 = () => {
             canvasScaleRatio = widthRatio;
         }
 
-        canvas.current.style.transform = `scale(${canvasScaleRatio})`;
+        canvas_current.style.transform = `scale(${canvasScaleRatio})`;
         context.fillStyle = 'white';
         context.drawImage(imageElem, 0, 0);
 
         const recalculatedInnerWidth = document.body.offsetWidth / canvasScaleRatio;
 
         if (!values.rectStartY) {
-            values.rectStartY = canvas.current.offsetTop + (canvas.current.height - canvas.current.height * canvasScaleRatio) / 2;
+            values.rectStartY = canvas_current.offsetTop + (canvas_current.height - canvas_current.height * canvasScaleRatio) / 2;
             values.rect1X[2].start = (window.innerHeight / 2) / scrollHeight;
             values.rect2X[2].start = (window.innerHeight / 2) / scrollHeight;
             values.rect1X[2].end = values.rectStartY / scrollHeight;
@@ -129,7 +128,7 @@ const ScrollSection1 = () => {
         }
 
         const whiteRectWidth = recalculatedInnerWidth * 0.5;
-        values.rect1X[0] = (canvas.current.width - recalculatedInnerWidth) / 2
+        values.rect1X[0] = (canvas_current.width - recalculatedInnerWidth) / 2
         values.rect1X[1] = values.rect1X[0] - whiteRectWidth;
         values.rect2X[0] = values.rect1X[0] + recalculatedInnerWidth - whiteRectWidth;
         values.rect2X[1] = values.rect2X[0] + whiteRectWidth;
@@ -139,42 +138,42 @@ const ScrollSection1 = () => {
             parseInt(calcValues(values.rect1X, currentYOffset, 0)),
             0,
             parseInt(whiteRectWidth),
-            canvas.current.height
+            canvas_current.height
         );
         context.fillRect(
             parseInt(calcValues(values.rect2X, currentYOffset, 0)),
             0,
             parseInt(whiteRectWidth),
-            canvas.current.height
+            canvas_current.height
         );
 
         if(scrollRatio < values.rect1X[2].end) {
-            canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
-            canvas.current.classList.remove('sticky');
+            canvas_current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
+            canvas_current.classList.remove('sticky');
         }
         else {
             values.blendHeight[0] = 0;
-            values.blendHeight[1] = canvas.current.height;
+            values.blendHeight[1] = canvas_current.height;
             values.blendHeight[2].start = values.rect1X[2].end;
             values.blendHeight[2].end = values.blendHeight[2].start + 0.15;
             const blendHeight = calcValues(values.blendHeight, currentYOffset, 0);
             context.drawImage(imageElem2,
-                0, canvas.current.height - blendHeight, canvas.current.width, blendHeight,
-                0, canvas.current.height - blendHeight, canvas.current.width, blendHeight
+                0, canvas_current.height - blendHeight, canvas_current.width, blendHeight,
+                0, canvas_current.height - blendHeight, canvas_current.width, blendHeight
             );
 
-            canvas.current.style.marginTop = 0;
-            canvas.current.classList.add('sticky');
-            canvas.current.style.top = `${-(canvas.current.height - canvas.current.height * canvasScaleRatio) / 2}px`;
+            canvas_current.style.marginTop = 0;
+            canvas_current.classList.add('sticky');
+            canvas_current.style.top = `${-(canvas_current.height - canvas_current.height * canvasScaleRatio) / 2}px`;
 
             if(scrollRatio > values.blendHeight[2].end) {
                 values.canvas_scale[0] = canvasScaleRatio;
-                values.canvas_scale[1] = document.body.offsetWidth / (1.5* canvas.current.width);
+                values.canvas_scale[1] = document.body.offsetWidth / (1.5* canvas_current.width);
 
                 values.canvas_scale[2].start = values.blendHeight[2].end;
                 values.canvas_scale[2].end = values.canvas_scale[2].start + 0.15;
 
-                canvas.current.style.transform = `scale(${calcValues(values.canvas_scale, currentYOffset, 0)})`;
+                canvas_current.style.transform = `scale(${calcValues(values.canvas_scale, currentYOffset, 0)})`;
                 
             }
         }
