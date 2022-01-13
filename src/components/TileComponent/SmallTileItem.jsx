@@ -23,11 +23,19 @@ const SmallTileItem = ({ value }) => {
     const scrollEventListener = () => {
         const tile_wrapper_current = tile_wrapper.current
         playAnimation(tile_wrapper_current);
-        
+    }
+
+    const resizeEventListener= () => {
+        if(SceneInfo[1].heightNum == 3) {
+            const tile_wrapper_current = tile_wrapper.current;
+            tile_wrapper.current.style.marginBottom = '100px;';
+            
+        }
     }
 
     useEffect(()=> {
         window.addEventListener('scroll', scrollEventListener);
+        window.addEventListener('resize', resizeEventListener);
 
         return(()=> {
             window.removeEventListener('scroll', scrollEventListener);

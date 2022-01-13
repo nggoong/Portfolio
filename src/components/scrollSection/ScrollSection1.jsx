@@ -95,6 +95,7 @@ const ScrollSection1 = () => {
         const widthRatio = window.innerWidth / canvas_current.width;
         const heightRatio = window.innerHeight / canvas_current.height;
         let canvasScaleRatio;
+        
 
         const context = canvas_current.getContext('2d');
 

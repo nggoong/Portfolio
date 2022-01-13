@@ -37,9 +37,10 @@ const SceneInfo = [
         heightNum:2,
         scrollHeight:0,
         values: {
-            large_title_opacity_out:[1, 0, {start:0.01, end: 0.03}],
-            large_content_opacity_in:[0, 1, {start:0.03, end:0.06}],
-            small_tile_wrapper_translateY:[40, 0, {start:0.06, end:0.2}]
+            large_title_opacity_out:[1, 0, {start:0, end: 0.02}],
+            large_content_opacity_in:[0, 1, {start:0.02, end:0.05}],
+            small_tile_wrapper_translateY:[50, 0, {start:0.1, end:0.2}],
+            small_tile_moving_translateY:[30,0, {start:0.2, end: 0.35}]
         }
     }
 ];
