@@ -6,6 +6,7 @@ import LargeTileValues from '../../LargeTileValues';
 import SmallTileItem from '../TileComponent/SmallTileItem';
 import { useLocation } from 'react-router-dom';
 import SceneInfo from '../../SceneInfo';
+import MediumTileItem from '../TileComponent/MediumTileItem';
 
 const ScrollSection2 = () => {
 
@@ -19,16 +20,16 @@ const ScrollSection2 = () => {
     const resizeEventListener = () => {
         setLayout(1, container2);
         console.log('resize [scrollsection2]');
-        if(window.innerWidth < 500 ) {
-            SceneInfo[1].heightNum = 3;
-            setLayout(1, container2);
-            console.log(SceneInfo[1].heightNum);
-        }
-        else {
-            SceneInfo[1].heightNum = 2;
-            setLayout(1, container2);
-            console.log(SceneInfo[1].heightNum);
-        }
+        // if(window.innerWidth < 500 ) {
+        //     SceneInfo[1].heightNum = 3;
+        //     setLayout(1, container2);
+        //     console.log(SceneInfo[1].heightNum);
+        // }
+        // else {
+        //     SceneInfo[1].heightNum = 2;
+        //     setLayout(1, container2);
+        //     console.log(SceneInfo[1].heightNum);
+        // }
     }
 
     const scrollEventListener = useCallback(() => {
@@ -56,7 +57,7 @@ const ScrollSection2 = () => {
         <div id="scroll-section-2" className='scroll-section' ref={container2}>
             <LargeTileItem value={LargeTileValues[0]}/>
             <SmallTileItem value={LargeTileValues}/>
-            <LargeTileItem value={LargeTileValues[0]}/>
+            <MediumTileItem value={LargeTileValues[3]}/>
         </div>
     )
 }

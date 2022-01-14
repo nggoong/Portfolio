@@ -33,14 +33,15 @@ const SceneInfo = [
         }
     },
     {
-        type:'sticky',
+        type:'normal',
         heightNum:2,
         scrollHeight:0,
         values: {
             large_title_opacity_out:[1, 0, {start:0, end: 0.02}],
             large_content_opacity_in:[0, 1, {start:0.02, end:0.05}],
             small_tile_wrapper_translateY:[50, 0, {start:0.1, end:0.2}],
-            small_tile_moving_translateY:[30,0, {start:0.2, end: 0.35}]
+            small_tile_moving_translateY:[30,0, {start:0.2, end: 0.35}],
+            medium_tile_wrapper_translateY:[35,0,{start:0.35, end:0.4}]
         }
     }
 ];

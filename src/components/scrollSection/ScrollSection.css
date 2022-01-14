@@ -5,8 +5,13 @@
     --bg-gray-color: #eeeeee
 }
 
+pre {
+    margin:0;
+}
+
 .scroll-section {
     font-family: 'Noto Sans KR', sans-serif;
+    padding-bottom:20px;
 }
 
 #scroll-section-1 {
@@ -143,6 +148,11 @@
     min-width:160px; */
 }
 
+.medium-tile-container {
+    height:25vh;
+    transform:translate3d(0,35%,0);
+}
+
 
 
 
@@ -189,6 +199,5 @@
         line-height: 2.5rem;
     }
 
-    
 
 }

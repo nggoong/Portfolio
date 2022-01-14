@@ -38,7 +38,7 @@ const LargeTileItem = ({ value, titleTiming, contentTiming }) => {
                 <div className="large-tile-title tile-title" ref={titleRef}>
                     <h1>{value.title}</h1>
                 </div>
-                <div className="large-tile-content" ref={contentRef}>
+                <div className="large-tile-content tile-content" ref={contentRef}>
                     <pre>{value.content}</pre>   
                 </div>
             </div>
