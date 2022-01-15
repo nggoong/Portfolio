@@ -6,7 +6,7 @@ import firstBlendImage from '../../images/canvasBlendImage-1.jpg';
 import secondBlendImage from '../../images/canvasBlendImage-2.jpg';
 import { useLocation } from 'react-router-dom';
 
-const ScrollSection1 = () => {
+const ScrollSection1 = ({ changeRouteIndex }) => {
 
     const container1 = useRef();
     const canvas = useRef();
@@ -22,8 +22,6 @@ const ScrollSection1 = () => {
     useEffect(()=> {
         setLayout(0, container1);
         canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
-
-        
     }, []);
 
     useEffect(()=> {
@@ -49,14 +47,12 @@ const ScrollSection1 = () => {
     const loadEventListener = (context) => {
         setCanvasImages();
         context.drawImage(imageElem, 0, 0);
-        console.log('load [scrollsection1]')
     }
 
     const resizeEventListener = () => {
         setLayout(0, container1);
         // playAnimation();
         canvas.current.style.maginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
-        console.log('resize [scrollsection1]')
     }
     
     const scrollEventListener = () => {
@@ -64,9 +60,15 @@ const ScrollSection1 = () => {
         // const messageA_current = messageA.current;
         // const messageB_current = messageB.current;
         // const messageC_current = messageC.current;
+        const currentScrollY = window.pageYOffset;
         const canvas_current = canvas.current;
-        console.log('scroll [scrollsection1]');
         playAnimation(canvas_current);
+        console.log(currentScrollY);
+        console.log(SceneInfo[0].scrollHeight - (window.innerHeight / 2));
+        // padding-top:50vh 때문에 innerHeight / 2 를 한 값을 반영해야함.
+        if(currentScrollY > SceneInfo[0].scrollHeight - (window.innerHeight / 2)) {
+            changeRouteIndex(1);
+        }
     }
     
 

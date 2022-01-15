@@ -34,6 +34,8 @@ const ScrollSection2 = () => {
 
     const scrollEventListener = useCallback(() => {
         console.log('scroll event [scrollsection2]');
+        console.log(window.pageYOffset + window.innerHeight);
+        console.log(SceneInfo[1].scrollHeight);
     }, [])
 
 
