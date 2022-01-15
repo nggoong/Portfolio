@@ -33,10 +33,10 @@ function App() {
     <Header></Header>
       <Switch>
         <Route exact path="/" render={() => <ScrollSection1 changeRouteIndex={changeRouteIndex}/>} />
-        <Route path="/about-me" component={ScrollSection2} changeRouteIndex={changeRouteIndex}/>
-        <Route path="/skills" component={ScrollSection3} changeRouteIndex={changeRouteIndex}/>
-        <Route path="/projects" component={ScrollSection4} changeRouteIndex={changeRouteIndex}/>
-        <Route path="/contact" component={ScrollSection5} changeRouteIndex={changeRouteIndex}/>
+        <Route path="/about-me" render={()=> <ScrollSection2 changeRouteIndex={changeRouteIndex}/>}/>
+        <Route path="/skills" render={()=> <ScrollSection3 changeRouteIndex={changeRouteIndex}/>}/>
+        <Route path="/projects" render={()=> <ScrollSection4 changeRouteIndex={changeRouteIndex}/>}/>
+        <Route path="/contact" render={()=> <ScrollSection5 changeRouteIndex={changeRouteIndex}/>}/>
         <Route render={()=><Redirect to='/'/>}/>
       </Switch>
     {/* </BrowserRouter> */}

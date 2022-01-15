@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 import SceneInfo from '../../SceneInfo';
 import MediumTileItem from '../TileComponent/MediumTileItem';
 
-const ScrollSection2 = () => {
+const ScrollSection2 = ({ changeRouteIndex }) => {
 
     const container2 = useRef();
     const { pathname } = useLocation();
@@ -32,6 +32,14 @@ const ScrollSection2 = () => {
         // }
     }
 
+    const mousewheelEventListener = (e)=> {
+        const currentScrollY = window.pageYOffset;
+        if(currentScrollY > SceneInfo[1].scrollHeight - window.innerHeight && e.deltaY > 0) {
+            changeRouteIndex(2);
+        }
+        else if(currentScrollY <= 0 && e.deltaY < 0) changeRouteIndex(0);
+    }
+
     const scrollEventListener = useCallback(() => {
         console.log('scroll event [scrollsection2]');
         console.log(window.pageYOffset + window.innerHeight);
@@ -47,10 +55,12 @@ const ScrollSection2 = () => {
     useEffect(()=> {
         window.addEventListener('scroll', scrollEventListener);
         window.addEventListener('resize', resizeEventListener);
+        window.addEventListener('mousewheel', mousewheelEventListener);
 
         return(()=> {
             window.removeEventListener('scroll', scrollEventListener);
             window.removeEventListener('resize', resizeEventListener);
+            window.removeEventListener('mousewheel', mousewheelEventListener);
         })
     })
 

@@ -33,6 +33,7 @@ const ScrollSection1 = ({ changeRouteIndex }) => {
         window.addEventListener('load', loadEventListener(context));
         window.addEventListener('resize', resizeEventListener);
         window.addEventListener('scroll', scrollEventListener);
+        window.addEventListener('mousewheel', mousewheelEventListener)
         
         
 
@@ -40,9 +41,17 @@ const ScrollSection1 = ({ changeRouteIndex }) => {
             window.removeEventListener('load', loadEventListener);
             window.removeEventListener('resize', resizeEventListener);
             window.removeEventListener('scroll', scrollEventListener);
+            window.removeEventListener('mousewheel', mousewheelEventListener);
     }
 })
 
+    const mousewheelEventListener = (e)=> {
+        const currentScrollY = window.pageYOffset;
+        if(currentScrollY > SceneInfo[0].scrollHeight - (window.innerHeight / 2) && e.deltaY > 0) {
+            changeRouteIndex(1);
+        }
+        else if(currentScrollY <= 0 && e.deltaY < 0) return;
+    }
 
     const loadEventListener = (context) => {
         setCanvasImages();
@@ -60,15 +69,13 @@ const ScrollSection1 = ({ changeRouteIndex }) => {
         // const messageA_current = messageA.current;
         // const messageB_current = messageB.current;
         // const messageC_current = messageC.current;
-        const currentScrollY = window.pageYOffset;
         const canvas_current = canvas.current;
         playAnimation(canvas_current);
-        console.log(currentScrollY);
-        console.log(SceneInfo[0].scrollHeight - (window.innerHeight / 2));
+        // console.log(currentScrollY);
+        // console.log(SceneInfo[0].scrollHeight - (window.innerHeight / 2));
         // padding-top:50vh 때문에 innerHeight / 2 를 한 값을 반영해야함.
-        if(currentScrollY > SceneInfo[0].scrollHeight - (window.innerHeight / 2)) {
-            changeRouteIndex(1);
-        }
+        // console.log(e);
+        
     }
     
 

@@ -1,6 +1,19 @@
-const ScrollSection5 = () => {
+import React, { useEffect } from 'react';
 
+const ScrollSection5 = ({ changeRouteIndex }) => {
 
+    const mousewheelEventListener = (e) => {
+        if(e.deltaY > 0) return;
+        else changeRouteIndex(3);
+    }
+
+    useEffect(()=> {
+        window.addEventListener('mousewheel', mousewheelEventListener);
+
+        return(()=> {
+            window.removeEventListener('mousewheel', mousewheelEventListener);
+        })
+    })
 
     return(
         <>
