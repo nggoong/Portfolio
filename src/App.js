@@ -15,21 +15,29 @@ import { CSSTransition } from 'react-transition-group';
 function App() {
   
   const [routeIndex, setRouteIndex] = useState(0);
-  const routeList = ['/', "/introduction", '/skills', '/projects', '/contact'];
-  let history = useHistory();
-  let location = useLocation();
-
-  const routes = [
+  const [routes, setRoutes] = useState([
     {path:'/', name:'ScrollSection1', Component: ScrollSection1},
     {path:'/introduction', name:'ScrollSection2', Component: ScrollSection2},
     {path:'/skills', name:'ScrollSection3', Component: ScrollSection3},
     {path:'/projects', name:'ScrollSection4', Component: ScrollSection4},
     {path:'/contact', name:'ScrollSection5', Component: ScrollSection5}
-  ]
+  ])
+  const routeList = ['/', "/introduction", '/skills', '/projects', '/contact'];
+  let history = useHistory();
+  let location = useLocation();
+
+
+  // const routes = [
+  //   {path:'/', name:'ScrollSection1', Component: ScrollSection1},
+  //   {path:'/introduction', name:'ScrollSection2', Component: ScrollSection2},
+  //   {path:'/skills', name:'ScrollSection3', Component: ScrollSection3},
+  //   {path:'/projects', name:'ScrollSection4', Component: ScrollSection4},
+  //   {path:'/contact', name:'ScrollSection5', Component: ScrollSection5}
+  // ]
 
   useEffect(()=> {
     history.push(routes[routeIndex].path);
-  },[routeIndex, history]);
+  },[routeIndex, history, routes]);
 
   useEffect(()=>{
     console.log(location.pathname);

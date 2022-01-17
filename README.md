@@ -10,3 +10,5 @@
 2. canvas API
 
 3. react-router-dom@5.3.0
+
+4. react-transition-group (CSStransition)
