@@ -6,8 +6,8 @@ import ScrollSection3 from './components/scrollSection/ScrollSection3';
 import ScrollSection4 from './components/scrollSection/ScrollSection4';
 import ScrollSection5 from './components/scrollSection/ScrollSection5';
 import { useState, useEffect } from 'react';
-import { Switch, Route, Redirect, useHistory} from 'react-router-dom';
-import SceneInfo from './SceneInfo';
+import { Route, Redirect, useHistory, useLocation} from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
 
 
@@ -15,12 +15,25 @@ import SceneInfo from './SceneInfo';
 function App() {
   
   const [routeIndex, setRouteIndex] = useState(0);
-  const routeList = ['/', "/about-me", '/skills', '/projects', '/contact'];
+  const routeList = ['/', "/introduction", '/skills', '/projects', '/contact'];
   let history = useHistory();
+  let location = useLocation();
+
+  const routes = [
+    {path:'/', name:'ScrollSection1', Component: ScrollSection1},
+    {path:'/introduction', name:'ScrollSection2', Component: ScrollSection2},
+    {path:'/skills', name:'ScrollSection3', Component: ScrollSection3},
+    {path:'/projects', name:'ScrollSection4', Component: ScrollSection4},
+    {path:'/contact', name:'ScrollSection5', Component: ScrollSection5}
+  ]
 
   useEffect(()=> {
-    history.push(routeList[routeIndex]);
-  },[routeIndex]);
+    history.push(routes[routeIndex].path);
+  },[routeIndex, history]);
+
+  useEffect(()=>{
+    console.log(location.pathname);
+  }, [location.pathname])
 
   const changeRouteIndex = (index) => {
     console.log('router change');
@@ -29,18 +42,24 @@ function App() {
 
   return (
     <>
-    {/* <BrowserRouter> */}
-    <Header></Header>
-      <Switch>
-        <Route exact path="/" render={() => <ScrollSection1 changeRouteIndex={changeRouteIndex}/>} />
-        <Route path="/about-me" render={()=> <ScrollSection2 changeRouteIndex={changeRouteIndex}/>}/>
-        <Route path="/skills" render={()=> <ScrollSection3 changeRouteIndex={changeRouteIndex}/>}/>
-        <Route path="/projects" render={()=> <ScrollSection4 changeRouteIndex={changeRouteIndex}/>}/>
-        <Route path="/contact" render={()=> <ScrollSection5 changeRouteIndex={changeRouteIndex}/>}/>
-        <Route render={()=><Redirect to='/'/>}/>
-      </Switch>
-    {/* </BrowserRouter> */}
-      
+      <Header/>
+      {routes.map(({ path, Component }) => (
+            <Route key={path} exact path={path}>
+              {({ match }) => (
+                <CSSTransition
+                  in={match != null}
+                  timeout={300}
+                  classNames="page"
+                  unmountOnExit
+                >
+                  <div className="page">
+                    <Component changeRouteIndex={changeRouteIndex}/>
+                  </div>
+                </CSSTransition>
+              )}
+            </Route>
+          ))}
+           <Route render={()=><Redirect to='/'/>}/>
     </>
   );
 }

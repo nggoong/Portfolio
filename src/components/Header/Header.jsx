@@ -7,7 +7,7 @@ const Header = ()=> {
         <>
         <nav className="global-nav">
 			<div className="global-nav-links">
-				<Link to={'/about-me'} className='global-nav-item'>&#60;AboutMe/&#62;</Link>
+				<Link to={'/introduction'} className='global-nav-item'>&#60;introduction/&#62;</Link>
 				<Link to={'/skills'} className='global-nav-item'>&#60;Skills/&#62;</Link>
 				<Link to={'/projects'} className='global-nav-item'>&#60;Projects/&#62;</Link>
 				<Link to={'/contact'} className='global-nav-item'>&#60;Contact/&#62;</Link>

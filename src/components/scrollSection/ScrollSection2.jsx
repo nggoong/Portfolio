@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useCallback } from 'react';
-// import SceneInfo from '../../SceneInfo';
-import { setLayout, calcValues } from '../../funcs/funcs';
+import { setLayout } from '../../funcs/funcs';
 import LargeTileItem from '../TileComponent/LargeTileItem';
 import LargeTileValues from '../../LargeTileValues';
 import SmallTileItem from '../TileComponent/SmallTileItem';
@@ -20,16 +19,6 @@ const ScrollSection2 = ({ changeRouteIndex }) => {
     const resizeEventListener = () => {
         setLayout(1, container2);
         console.log('resize [scrollsection2]');
-        // if(window.innerWidth < 500 ) {
-        //     SceneInfo[1].heightNum = 3;
-        //     setLayout(1, container2);
-        //     console.log(SceneInfo[1].heightNum);
-        // }
-        // else {
-        //     SceneInfo[1].heightNum = 2;
-        //     setLayout(1, container2);
-        //     console.log(SceneInfo[1].heightNum);
-        // }
     }
 
     const mousewheelEventListener = (e)=> {
