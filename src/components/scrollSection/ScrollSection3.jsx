@@ -1,23 +1,20 @@
 import React, { useEffect } from 'react';
 
-const ScrollSection3 = ({ changeRouteIndex }) => {
-
-    const mousewheelEventListener = (e) => {
-        if(e.deltaY > 0) changeRouteIndex(3);
-        else changeRouteIndex(1);
-    }
+const ScrollSection3 = () => {
 
     useEffect(()=> {
-        window.addEventListener('mousewheel', mousewheelEventListener);
+        document.querySelector('body').style.overflowY='hidden';
 
         return(()=> {
-            window.removeEventListener('mousewheel', mousewheelEventListener);
+            document.querySelector('body').style.overflowY='visible';
         })
-    })
+    }, [])
 
     return(
         <>
-        scrollsection-3
+        <div id="scroll-section-3">
+            sdfffffffffffffff
+        </div>
         </>
 
     )

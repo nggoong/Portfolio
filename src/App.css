@@ -1,21 +1,21 @@
-  .page {
+  /* .page {
     position: relative;
   }
   
   .page-enter {
     opacity: 0;
-    transform: scale(1.1);
+    transform: scale(1.1) translate3d(0, -1000px, 0);
   }
   
   .page-enter-active {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translate3d(0, -1000px, 0);
     transition: opacity 300ms, transform 300ms;
   }
   
   .page-exit {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translate3d(0, -1000px, 0);
   }
   
   .page-exit-active {
@@ -23,4 +23,53 @@
     transform: scale(0.9);
     transition: opacity 300ms, transform 300ms;
   }
+   */
+  .page {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+  }
+
+  .page-enter {
+      opacity: 0.5;
+      
+      transition: all 500ms;
+  }
+
+  .page-enter-active {
+      opacity: 1;
+      transition: all 500ms;
+  }
+
+  .page-exit {
+      opacity: 0;
+      transition: all 500ms;
+  }
+
+  .page-minus-exit-active {
+      opacity: 0;
+      transition: all 500ms;
+  }
   
+
+  #scroll-section-3,
+  #scroll-section-4,
+  #scroll-section-5 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+  }
+
+  #scroll-section-3 {
+      background: yellow;
+  }
+
+  #scroll-section-4 {
+      background: blue;
+  }
+
+  #scroll-section-5 {
+      background: red;
+  }

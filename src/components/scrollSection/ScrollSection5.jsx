@@ -1,23 +1,12 @@
 import React, { useEffect } from 'react';
 
-const ScrollSection5 = ({ changeRouteIndex }) => {
+const ScrollSection5 = () => {
 
-    const mousewheelEventListener = (e) => {
-        if(e.deltaY > 0) return;
-        else changeRouteIndex(3);
-    }
-
-    useEffect(()=> {
-        window.addEventListener('mousewheel', mousewheelEventListener);
-
-        return(()=> {
-            window.removeEventListener('mousewheel', mousewheelEventListener);
-        })
-    })
 
     return(
         <>
-            항상 배우는 자세로 성장할 기회를 잡자
+        <div id="scroll-section-5">
+        항상 배우는 자세로 성장할 기회를 잡자
             프로젝트 전체를 완성하는 것 뿐만 아니라
             기능 하나를 구현하는 거에도 큰 희열을 느끼는
 
@@ -26,6 +15,8 @@ const ScrollSection5 = ({ changeRouteIndex }) => {
             열정, 배우는 자세, 낮은 자세
 
             열린 마인드
+        </div>
+            
         </>
     )
 }

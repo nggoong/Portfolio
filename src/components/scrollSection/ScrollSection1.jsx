@@ -6,7 +6,7 @@ import firstBlendImage from '../../images/canvasBlendImage-1.jpg';
 import secondBlendImage from '../../images/canvasBlendImage-2.jpg';
 import { useLocation } from 'react-router-dom';
 
-const ScrollSection1 = ({ changeRouteIndex }) => {
+const ScrollSection1 = () => {
 
     const container1 = useRef();
     const canvas = useRef();
@@ -24,16 +24,15 @@ const ScrollSection1 = ({ changeRouteIndex }) => {
         canvas.current.style.marginTop = `${SceneInfo[0].scrollHeight * 0.5}px`;
     }, []);
 
-    useEffect(()=> {
-        window.scrollTo(0,0);
-    },[pathname])
+    // useEffect(()=> {
+    //     window.scrollTo(0,0);
+    // },[pathname])
 
     useEffect(()=> {
         const context = canvas.current.getContext('2d');
         window.addEventListener('load', loadEventListener(context));
         window.addEventListener('resize', resizeEventListener);
         window.addEventListener('scroll', scrollEventListener);
-        window.addEventListener('mousewheel', mousewheelEventListener)
         
         
 
@@ -41,17 +40,9 @@ const ScrollSection1 = ({ changeRouteIndex }) => {
             window.removeEventListener('load', loadEventListener);
             window.removeEventListener('resize', resizeEventListener);
             window.removeEventListener('scroll', scrollEventListener);
-            window.removeEventListener('mousewheel', mousewheelEventListener);
     }
 })
 
-    const mousewheelEventListener = (e)=> {
-        const currentScrollY = window.pageYOffset;
-        if(currentScrollY > SceneInfo[0].scrollHeight - (window.innerHeight / 2) && e.deltaY > 0) {
-            changeRouteIndex(1);
-        }
-        else if(currentScrollY <= 0 && e.deltaY < 0) return;
-    }
 
     const loadEventListener = (context) => {
         setCanvasImages();
