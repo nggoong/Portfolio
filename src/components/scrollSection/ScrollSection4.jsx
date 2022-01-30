@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Carousel from '../Carousel/Carousel';
 
 const ScrollSection4 = () => {
 
@@ -6,8 +7,7 @@ const ScrollSection4 = () => {
     return(
         <>
             <div id="scroll-section-4">
-
-                asdfsdfdfsdfsdf
+                <Carousel></Carousel>
             </div>
         </>
     )

@@ -39,6 +39,16 @@ const calcValues = (values, currentYOffset, index) => {
     return rv;
 }
 
+const scrollThrottle = (callback, delay) => {
+    let timer;
+
+    return(()=> {
+      if(timer) return;
+      timer = setTimeout(()=>{
+        callback();
+      }, delay);
+    })
+  }
 
 
-export { setLayout, calcValues };
+export { setLayout, calcValues, scrollThrottle };

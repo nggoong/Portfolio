@@ -8,12 +8,9 @@ import ScrollSection5 from './components/scrollSection/ScrollSection5';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Route, Redirect, useHistory, useLocation} from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
-
-
-
+import SceneInfo from './SceneInfo';
 
 function App() {
-  
   const [routeIndex, setRouteIndex] = useState(0);
   const [routes, setRoutes] = useState([
     {path:'/', name:'ScrollSection1', Component: ScrollSection1},
@@ -23,51 +20,108 @@ function App() {
     {path:'/contact', name:'ScrollSection5', Component: ScrollSection5}
   ])
 
-  const [scrollValue, setScrollValue] = useState(0);
+  const path=[
+    '/', '/introduction', '/skills', 'projects', '/contact'
+  ]
+
+  const [isrender, setRender]= useState(false);
+
+  // const [scrollValue, setScrollValue] = useState(0);
+  let scrollValue = 0;
 
   let history = useHistory();
   let location = useLocation();
 
-  const scrollThrottle = (callback, delay) => {
+  const scrollDebounce = (callback, delay) => {
     let timer;
+    return (()=>{
+      if(timer) clearTimeout(timer);
+      timer = setTimeout(callback(), delay);
+    })
+  }
+
+  const mouseWheelEventListener = (e) => {
+    let index;
+    // let scrollref = scrollValue3.current;
+    if(routeIndex === 0) {
+      if(scrollValue + (window.innerHeight/2) >= SceneInfo[0].scrollHeight && e.deltaY > 0) {
+        index = 1;
+      }
+      else return;
+    }
+    else if(routeIndex === 1) {
+      if(scrollValue >= SceneInfo[1].scrollHeight && e.deltaY>0) {
+        index = 2;
+      }
+      else if(scrollValue === 0 && e.deltaY < 0) {
+        index = 0;
+      }
+    }
+    else if(routeIndex === 2) {
+      if(e.deltaY > 0) {
+        index = 3;
+      }
+      else if(e.deltaY < 0) {
+        index = 1;
+      }
+    }
+    else if(routeIndex === 3) {
+      if(e.deltaY > 0) {
+        index = 4;
+      }
+      else if(e.deltaY < 0) {
+        index = 2;
+      }
+    }
+    else if(routeIndex === 4) {
+      if(e.deltaY > 0) return;
+      else if(e.deltaY < 0) index = 3;
+    }
+    // scrollDebounce(changeRouteIndex(index), 500)
+    changeRouteIndex(index)
+  }
+
+  const scrollThrottle = (callback, delay) => {
+    let stimer;
+    console.log('scroll throttle')
 
     return(()=> {
-      if(timer) return;
-      timer = setTimeout(()=>{
+      if(stimer) return;
+      stimer = setTimeout(()=>{
         callback();
       }, delay);
     })
   }
 
+
   const scrollEventListener = () => {
-    const currentScroll = window.pageYOffset;
-    setScrollValue(currentScroll);
+    console.log('scrollevent');
+    // let currentScroll = window.pageYOffset;
+    // scrollValue = currentScroll;
+    // console.log(scrollValue);
   }
 
+  
+
   useEffect(()=>{
-    const updateScroll = () =>{
-      window.addEventListener('scroll', scrollThrottle(scrollEventListener, 300));
-      console.log(scrollValue);
-    }
-    updateScroll();
+    // const updateScroll = () =>{
+    //   window.addEventListener('wheel', scrollThrottle(()=>{console.log('mouse')},1000));
+    //   // window.addEventListener('scroll', scrollEventListener);
+    // }
+    window.addEventListener('wheel', scrollThrottle(scrollEventListener, 1000));
+    // updateScroll();
   })
 
-
   useEffect(()=> {
-    history.push(routes[routeIndex].path);
-  },[routeIndex, history, routes]);
+    console.log('route 변경')
+    // history.push(routes[routeIndex].path);
+    history.push(path[routeIndex]);
+  },[routeIndex, history]);
 
-  useEffect(()=>{
-    console.log(location.pathname);
-  }, [location.pathname])
-
-
-  useEffect(()=> {
-    console.log('hi');
-  }, [])
 
   const changeRouteIndex = (index) => {
     console.log('router change');
+    // scrollDebounce(setRouteIndex(index), 5000);
     setRouteIndex(index);
     // window.__scrollPosition = 0;
   }
@@ -85,7 +139,7 @@ function App() {
                   unmountOnExit
                 >
                   <div className="page">
-                    <Component/>
+                    <Component changeRouteIndex={changeRouteIndex}/>
                   </div>
                 </CSSTransition>
               )}

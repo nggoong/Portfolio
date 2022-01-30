@@ -6,8 +6,7 @@ import firstBlendImage from '../../images/canvasBlendImage-1.jpg';
 import secondBlendImage from '../../images/canvasBlendImage-2.jpg';
 import { useLocation } from 'react-router-dom';
 
-const ScrollSection1 = () => {
-
+const ScrollSection1 = ({ changeRouteIndex }) => {
     const container1 = useRef();
     const canvas = useRef();
     const messageA = useRef();
@@ -33,6 +32,7 @@ const ScrollSection1 = () => {
         window.addEventListener('load', loadEventListener(context));
         window.addEventListener('resize', resizeEventListener);
         window.addEventListener('scroll', scrollEventListener);
+        window.addEventListener('mousewheel', mouseWheelEventListener);
         
         
 
@@ -40,6 +40,7 @@ const ScrollSection1 = () => {
             window.removeEventListener('load', loadEventListener);
             window.removeEventListener('resize', resizeEventListener);
             window.removeEventListener('scroll', scrollEventListener);
+            window.removeEventListener('mousewheel', mouseWheelEventListener);
     }
 })
 
@@ -67,6 +68,14 @@ const ScrollSection1 = () => {
         // padding-top:50vh 때문에 innerHeight / 2 를 한 값을 반영해야함.
         // console.log(e);
         
+    }
+
+    const mouseWheelEventListener = (e) => {
+        let currentYScroll = window.pageYOffset;
+        if(currentYScroll + (window.innerHeight / 2) > SceneInfo[0].scrollHeight && e.deltaY > 0) {
+            changeRouteIndex(1);
+        }
+        else if(currentYScroll <= 0 && e.deltaY < 0) return;
     }
     
 
@@ -232,4 +241,4 @@ const ScrollSection1 = () => {
     )
 }
 
-export default ScrollSection1;
+export default React.memo(ScrollSection1);
