@@ -1,4 +1,6 @@
 import React from 'react';
+import CarouselItem from './CarouselItem';
+import CarouselValue from '../../CarouselValue';
 
 
 const Carousel = () => {
@@ -9,7 +11,7 @@ const Carousel = () => {
             <button> prev </button>
             <div className="carousel-viewer">
                 <div className="carousel-slider">
-                    
+                    {CarouselValue.map((value)=>{return(<CarouselItem value={value}></CarouselItem>)})}
                 </div>
             </div>
             <button> next </button>
